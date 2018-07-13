@@ -1,32 +1,39 @@
 import {Injectable} from '@angular/core';
 import {HttpHeaders, HttpClient} from '@angular/common/http';
-import {catchError} from "rxjs/operators";
-import {Observable} from "rxjs/internal/Observable";
-import {Bike} from './bike'
-import {of} from "rxjs/internal/observable/of";
+import {catchError} from 'rxjs/operators';
+import {Observable} from 'rxjs/internal/Observable';
+import {Bike} from './bike';
+import {of} from 'rxjs/internal/observable/of';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class BikesService {
 
-  constructor(private http: HttpClient) {
-  }
+    private bikesUrl = 'http://localhost:8000/bikes.php';
+    private bikeUrl = 'http://localhost:8000/bike.php';
 
-  private headers = new HttpHeaders({
-    'Content-Type': 'application/json'
-  });
-  private bikesUrl = 'http://localhost:8000/bikes.php';
+    private headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+    });
 
-  getBikes(): Observable<Bike[]> {
-    return this.http.get<Bike[]>(this.bikesUrl, {headers: this.headers})
-      .pipe(catchError(this.handleError('getBikes', [])))
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.log(operation, error);
-      return of(result as T);
-    };
-  }
+    getBikes(): Observable<Bike[]> {
+        return this.http.get<Bike[]>(this.bikesUrl, {headers: this.headers})
+            .pipe(catchError(this.handleError('getBikes', [])));
+    }
+
+    getBike(id: number): Observable<Bike> {
+        return this.http.get<Bike>(`${this.bikeUrl}?id=${id}`, {headers: this.headers})
+            .pipe(catchError(this.handleError('getBike', null)));
+    }
+
+    private handleError<T>(operation = 'operation', result?: T) {
+        return (error: any): Observable<T> => {
+            console.log(operation, error);
+            return of(result as T);
+        };
+    }
 }
