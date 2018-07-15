@@ -6,18 +6,21 @@ import {AppComponent} from './app.component';
 import {BikesComponent} from './bikes/bikes.component';
 import {BikeDetailsComponent} from './bike-details/bike-details.component';
 import {AppRoutingModule} from './app-routing.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AddBikeComponent } from './add-bike/add-bike.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         BikesComponent,
-        BikeDetailsComponent
+        BikeDetailsComponent,
+        AddBikeComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpClientModule,
+        ReactiveFormsModule,
         AppRoutingModule
     ],
     providers: [],

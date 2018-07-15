@@ -1,12 +1,12 @@
 [
-  {
-    "id": 1,
-    "model": "Bike model 1",
-    "manufacturer": "Manufacturer 1"
-  },
-  {
-    "id": 2,
-    "model": "Bike model 2",
-    "manufacturer": "Manufacturer 2"
-  }
+    {
+        "id": 1,
+        "model": "Bike model 1",
+        "manufacturer": "Manufacturer 1"
+    },
+    {
+        "id": 2,
+        "model": "Bike model 2",
+        "manufacturer": "Manufacturer 2"
+    }
 ]
