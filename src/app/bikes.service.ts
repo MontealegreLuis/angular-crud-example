@@ -14,6 +14,7 @@ export class BikesService {
     private bikeUrl = 'http://localhost:8000/bike.php';
     private addBikeUrl = 'http://localhost:8000/add-bike.php';
     private updateBikeUrl = 'http://localhost:8000/update-bike.php';
+    private deleteBikeUrl = 'http://localhost:8000/delete-bike.php';
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json'
@@ -40,6 +41,11 @@ export class BikesService {
     updateBike(bike: Bike): Observable<Bike> {
         return this.http.put(this.updateBikeUrl, bike, {headers: this.headers})
             .pipe(catchError(this.handleError('updateBike', null)));
+    }
+
+    deleteBike(id: number): Observable<Bike> {
+        return this.http.delete(`${this.deleteBikeUrl}?id=${id}`)
+            .pipe(catchError(this.handleError('deleteBike', null)));
     }
 
     private handleError<T>(operation = 'operation', result?: T) {

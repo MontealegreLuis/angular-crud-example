@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BikesService} from '../bikes.service';
 import {first} from 'rxjs/operators';
+import {Bike} from '../bike';
 
 @Component({
     selector: 'app-bike-details',
@@ -12,6 +13,7 @@ import {first} from 'rxjs/operators';
 })
 export class BikeDetailsComponent implements OnInit {
 
+    bike: Bike;
     editForm: FormGroup;
 
     constructor(
@@ -35,7 +37,21 @@ export class BikeDetailsComponent implements OnInit {
     getBike(): void {
         const id = +this.route.snapshot.paramMap.get('id');
         this.bikesService.getBike(id)
-            .subscribe(bike => this.editForm.setValue(bike));
+            .subscribe(bike => {
+                this.bike = bike;
+                this.editForm.setValue(bike);
+            });
+    }
+
+    deleteBike(): void {
+        this.bikesService.deleteBike(this.bike.id)
+            .subscribe(
+                data => {
+                    this.router.navigate(['bikes']);
+                },
+                error => {
+                    console.error(error);
+                });
     }
 
     onSubmit() {

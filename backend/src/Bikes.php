@@ -52,6 +52,14 @@ class Bikes
         return $updatedBike;
     }
 
+    public function delete(int $id): void
+    {
+        $this->bikes = array_values(array_filter($this->bikes, function (array $bike) use ($id) {
+            return $bike['id'] != $id;
+        }));
+        $this->saveBikes();
+    }
+
     private function saveBikes(): void
     {
         file_put_contents(self::$filename, json_encode($this->bikes, JSON_PRETTY_PRINT));
