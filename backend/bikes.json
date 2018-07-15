@@ -8,5 +8,25 @@
         "id": 2,
         "model": "Bike model 2",
         "manufacturer": "Manufacturer 2"
+    },
+    {
+        "id": 3,
+        "model": "Luis test model",
+        "manufacturer": "Luis test manufacturer"
+    },
+    {
+        "id": 4,
+        "model": "Super Mario model",
+        "manufacturer": "Mario manufacturer"
+    },
+    {
+        "id": 5,
+        "model": "Super Pico model",
+        "manufacturer": "Pico manufacturer"
+    },
+    {
+        "id": 6,
+        "model": "Super Meri model",
+        "manufacturer": "Super Meri manufacturer"
     }
 ]

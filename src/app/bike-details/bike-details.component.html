@@ -1,20 +1,18 @@
-<div *ngIf="bike">
+<h2>Edit Bike</h2>
 
-    <h2>{{bike.model}} Details</h2>
-
-    <div class="form-group">
-        <label>ID: </label>
-        <div class="form-control" readonly>{{bike.id}}</div>
-    </div>
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" formControlName="id">
 
     <div class="form-group">
         <label>Model:</label>
-        <input class="form-control" [(ngModel)]="bike.model" placeholder="model"/>
+        <input class="form-control" formControlName="model" placeholder="model"/>
     </div>
     <div class="form-group">
         <label>Manufacturer:</label>
-        <input class="form-control" [(ngModel)]="bike.manufacturer" placeholder="manufacturer"/>
+        <input class="form-control" formControlName="manufacturer" placeholder="manufacturer"/>
     </div>
 
+    <button class="btn btn-success">Update</button>
+
     <button class="btn btn-primary" (click)="goBack()">go back</button>
-</div>
+</form>

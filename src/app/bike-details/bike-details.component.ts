@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
-import {Bike} from '../bike';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BikesService} from '../bikes.service';
+import {first} from 'rxjs/operators';
 
 @Component({
     selector: 'app-bike-details',
@@ -11,9 +12,11 @@ import {BikesService} from '../bikes.service';
 })
 export class BikeDetailsComponent implements OnInit {
 
-    @Input() bike: Bike;
+    editForm: FormGroup;
 
     constructor(
+        private formBuilder: FormBuilder,
+        private router: Router,
         private route: ActivatedRoute,
         private bikesService: BikesService,
         private location: Location
@@ -21,13 +24,30 @@ export class BikeDetailsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.editForm = this.formBuilder.group({
+            id: [],
+            model: ['', Validators.required],
+            manufacturer: ['', Validators.required]
+        });
         this.getBike();
     }
 
     getBike(): void {
         const id = +this.route.snapshot.paramMap.get('id');
         this.bikesService.getBike(id)
-            .subscribe(bike => this.bike = bike);
+            .subscribe(bike => this.editForm.setValue(bike));
+    }
+
+    onSubmit() {
+        this.bikesService.updateBike(this.editForm.value)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    this.router.navigate(['bikes']);
+                },
+                error => {
+                    console.error(error);
+                });
     }
 
     goBack(): void {
