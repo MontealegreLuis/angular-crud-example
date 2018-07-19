@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BikesService} from '../bikes.service';
 import {first} from 'rxjs/operators';
 import {Bike} from '../bike';
+import {AuthService} from '../auth.service';
 
 @Component({
     selector: 'app-bike-details',
@@ -21,7 +22,8 @@ export class BikeDetailsComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private bikesService: BikesService,
-        private location: Location
+        private location: Location,
+        private auth: AuthService
     ) {
     }
 

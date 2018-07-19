@@ -12,7 +12,7 @@
         <input class="form-control" formControlName="manufacturer" placeholder="manufacturer"/>
     </div>
 
-    <button class="btn btn-success">Update</button>
-    <button class="btn btn-danger" (click)="deleteBike()"> Delete</button>
-    <button class="btn btn-default" (click)="goBack()">Go back</button>
+    <button class="btn btn-success" *ngIf="auth.loggedIn">Update</button>
+    <button class="btn btn-danger" (click)="deleteBike()" *ngIf="auth.loggedIn"> Delete</button>
+    <button class="btn btn-info" (click)="goBack()">Go back</button>
 </form>

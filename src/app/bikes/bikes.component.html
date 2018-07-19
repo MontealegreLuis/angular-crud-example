@@ -1,9 +1,5 @@
 <h2>Bikes</h2>
 
-<p>
-    <a routerLink="/add-bike" class="btn btn-primary">Add bike</a>
-</p>
-
 <ul class="list-group">
     <li class="list-group-item" *ngFor="let bike of bikes">
         <a routerLink="/detail/{{bike.id}}">

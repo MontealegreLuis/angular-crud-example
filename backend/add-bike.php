@@ -12,7 +12,9 @@ require __DIR__ . '/vendor/autoload.php';
 
 $request = Request::createFromGlobals();
 
-if ($request->isMethod(Request::METHOD_POST)) {
+if (!checkToken($request, KEY)) {
+    $response = new Response('', 401);
+} elseif ($request->isMethod(Request::METHOD_POST)) {
     $bike = json_decode($request->getContent(), true);
     $bikes = new Bikes();
     $bike = $bikes->add($bike);
